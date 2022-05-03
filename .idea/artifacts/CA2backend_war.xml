@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="CA2backend-1.0-SNAPSHOT.war">
+    <root id="archive" name="MovieSwipe-backend-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="CA2backend:war exploded" />
     </root>
   </artifact>

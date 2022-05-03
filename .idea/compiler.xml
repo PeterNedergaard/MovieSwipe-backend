@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CA2backend" options="-endorseddirs &quot;C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\target/endorsed&quot;" />
+      <module name="CA2backend" options="-endorseddirs C:\Users\mohae\Desktop\movie_swipe\backend\target/endorsed" />
     </option>
   </component>
 </project>
