@@ -30,6 +30,16 @@ public class User implements Serializable {
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
+  @ManyToMany
+  private List<Movie> movieList = new ArrayList<>();
+
+
+  public void addMovie(Movie movie){
+    this.movieList.add(movie);
+    movie.addUser(this);
+  }
+
+
   public List<String> getRolesAsStrings() {
     if (roleList.isEmpty()) {
       return null;
