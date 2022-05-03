@@ -1,0 +1,15 @@
+POST http://localhost:8080/CA2backend_war_exploded/api/login
+
+{username: "user", password: "test123"}
+
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/user
+x-access-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIiwiZXhwIjoxNjUwMjg4NjQ4LCJpYXQiOjE2NTAyODY4NDgsImlzc3VlciI6InNlbWVzdGVyc3RhcnRjb2RlLWRhdDMiLCJ1c2VybmFtZSI6InVzZXIifQ.gSZdUPArT8A8Gf2nJZAOaymHVdY-851oa98Uf-dhGmk
+
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/all
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/jokes
