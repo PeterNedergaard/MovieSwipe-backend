@@ -11,7 +11,7 @@ public class Facade implements Ifacade {
 
     private static EntityManagerFactory emf;
     private static Facade instance;
-
+//
     private Facade() {
     }
 
