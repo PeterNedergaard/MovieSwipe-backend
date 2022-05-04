@@ -19,10 +19,10 @@ public class Movie {
     private String duration;
 
     @ManyToMany(mappedBy = "movieList")
-    @JoinTable(
+    /*@JoinTable(
             name ="user_movie",
             joinColumns = @JoinColumn(name="movie_id"),
-            inverseJoinColumns = @JoinColumn(name="user_id"))
+            inverseJoinColumns = @JoinColumn(name="user_id"))*/
     private List<User> userList = new ArrayList<>();
 
     public Movie(String title, String releaseDate, String imgUrl, String rating, String duration) {

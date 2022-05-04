@@ -15,6 +15,11 @@ public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "user_id")
+  private Long id;
+
+
   @Basic(optional = false)
   @NotNull
   @Column(name = "user_name", length = 25)
