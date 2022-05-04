@@ -2,6 +2,7 @@ package dtos;
 
 import entities.Movie;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,8 +31,8 @@ public class MovieDTO {
         this.duration = movie.getDuration();
     }
 
-    public static Set<MovieDTO> getMovieDTOS(List<Movie> movies){
-        Set<MovieDTO> movieDTOS = new HashSet<>();
+    public static List<MovieDTO> getMovieDTOS(List<Movie> movies){
+        List<MovieDTO> movieDTOS = new ArrayList<>();
         movies.forEach(p->movieDTOS.add(new MovieDTO(p)));
         return movieDTOS;
     }

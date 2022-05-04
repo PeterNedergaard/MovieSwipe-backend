@@ -37,5 +37,13 @@ class FacadeTest {
 //        List<Movie> actual = facade.likedMoviesByUserId(2L);
 
     }
+    @Test
+    void getAllMovies(){
+        System.out.println("Test getAllMovies()");
+        int expected = 4;
+        int actual = facade.getAllMovies().size();
+        assertEquals(expected, actual);
 
+
+    }
 }

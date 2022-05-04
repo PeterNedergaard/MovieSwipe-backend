@@ -36,6 +36,10 @@ public class User implements Serializable {
   private List<Role> roleList = new ArrayList<>();
 
   @ManyToMany
+  @JoinTable(
+          name ="user_movie",
+          joinColumns = @JoinColumn(name="user_id"),
+          inverseJoinColumns = @JoinColumn(name="movie_id"))
   private List<Movie> movieList = new ArrayList<>();
 
 
@@ -98,4 +102,15 @@ public class User implements Serializable {
     roleList.add(userRole);
   }
 
+  public List<Movie> getMovieList() {
+    return movieList;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 }
