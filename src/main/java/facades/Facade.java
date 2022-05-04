@@ -1,13 +1,6 @@
 package facades;
 
-import dtos.MovieDTO;
+public class Facade {
 
-import java.util.Set;
 
-public class Facade implements Ifacade{
-
-    @Override
-    public Set<MovieDTO> getAllMovies() {
-        return null;
-    }
 }
