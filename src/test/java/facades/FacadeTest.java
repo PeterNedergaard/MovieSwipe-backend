@@ -86,7 +86,9 @@ class FacadeTest {
         expected.add(new MovieDTO("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
         expected.add(new MovieDTO("Spider-Man: No Way Home","2021","https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg","8.4","2h 28m"));
 
-        List<MovieDTO> actual = facade.likedMoviesByUserId(3L);
+        User user = facade.getUserByName("Rabee");
+
+        List<MovieDTO> actual = facade.likedMoviesByUserId(user.getId());
 
         assertEquals(expected,actual);
     }

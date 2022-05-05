@@ -46,4 +46,19 @@ public class Facade implements Ifacade {
         System.out.println(movieList.toString());
         return MovieDTO.getMovieDTOS(movieList);
     }
+
+    @Override
+    public User getUserByName(String Name) {
+        EntityManager em = emf.createEntityManager();
+
+        List<User> userList = em.createQuery("SELECT u FROM User u",User.class).getResultList();
+
+        for (User u : userList) {
+            if (u.getUserName().equals(Name)){
+                return u;
+            }
+        }
+
+        return null;
+    }
 }
