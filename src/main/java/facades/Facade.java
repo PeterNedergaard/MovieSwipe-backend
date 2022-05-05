@@ -2,6 +2,7 @@ package facades;
 
 import dtos.MovieDTO;
 import entities.Movie;
+import entities.User;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -30,11 +31,14 @@ public class Facade implements Ifacade {
     @Override
     public List<Movie> likedMoviesByUserId(Long id) {
         EntityManager em = emf.createEntityManager();
-        List<Long> query= em.createQuery("select m from Movie m left join fetch m.id ul where ul = :id")
-                .setParameter("id",id)
-                .getResultList();
+
+        User user = em.find(User.class,id);
+
+        System.out.println(user.getMovieList());
+
         return null;
     }
+
 
     @Override
     public List<MovieDTO> getAllMovies() {

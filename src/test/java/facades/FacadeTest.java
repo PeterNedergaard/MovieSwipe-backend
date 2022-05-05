@@ -28,15 +28,16 @@ class FacadeTest {
     void tearDown() {
     }
 
-//    @Test
-//    void likedMoviesByUserIdTest() {
+    @Test
+    void likedMoviesByUserIdTest() {
 //        System.out.println("Test Liked movies by user id");
 //        List<Movie> expected = new ArrayList<>();
 //        expected.add(new Movie("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
 //        expected.add(new Movie("Spider-Man: No Way Home","2021","https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg","8.4","2h 28m"));
-////        List<Movie> actual = facade.likedMoviesByUserId(2L);
-//
-//    }
+//        List<Movie> actual = facade.likedMoviesByUserId(2L);
+
+    }
+
     @Test
     void getAllMovies(){
         System.out.println("Test getAllMovies()");
