@@ -2,6 +2,7 @@ package facades;
 
 import entities.User;
 import security.errorhandling.AuthenticationException;
+import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +14,8 @@ public class UserFacade {
 
     private static EntityManagerFactory emf;
     private static UserFacade instance;
+
+    Facade facade = Facade.getFacade(EMF_Creator.createEntityManagerFactory());
 
     private UserFacade() {
     }
@@ -34,7 +37,7 @@ public class UserFacade {
         EntityManager em = emf.createEntityManager();
         User user;
         try {
-            user = em.find(User.class, username);
+            user = facade.getUserByName(username);
             if (user == null || !user.verifyPassword(password)) {
                 throw new AuthenticationException("Invalid user name or password");
             }
@@ -43,5 +46,19 @@ public class UserFacade {
         }
         return user;
     }
+
+//    public User getVeryfiedUser(String username, String password) throws AuthenticationException {
+//        EntityManager em = emf.createEntityManager();
+//        User user;
+//        try {
+//            user = em.find(User.class, username);
+//            if (user == null || !user.verifyPassword(password)) {
+//                throw new AuthenticationException("Invalid user name or password");
+//            }
+//        } finally {
+//            em.close();
+//        }
+//        return user;
+//    }
 
 }

@@ -13,6 +13,7 @@ import com.nimbusds.jwt.SignedJWT;
 import entities.User;
 import errorhandling.API_Exception;
 import errorhandling.GenericExceptionMapper;
+import facades.Facade;
 import facades.UserFacade;
 import security.errorhandling.AuthenticationException;
 import utils.EMF_Creator;
