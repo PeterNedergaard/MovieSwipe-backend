@@ -29,14 +29,12 @@ public class Facade implements Ifacade {
 
 
     @Override
-    public List<Movie> likedMoviesByUserId(Long id) {
+    public List<MovieDTO> likedMoviesByUserId(Long id) {
         EntityManager em = emf.createEntityManager();
 
         User user = em.find(User.class,id);
 
-        System.out.println(user.getMovieList());
-
-        return null;
+        return MovieDTO.getMovieDTOS(user.getMovieList());
     }
 
 

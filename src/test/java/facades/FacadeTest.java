@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.MovieDTO;
 import entities.Movie;
 import entities.Role;
 import entities.User;
@@ -44,7 +45,6 @@ class FacadeTest {
         user3.addMovie(uncharted);
 
 
-        try {
             em.getTransaction().begin();
             Role userRole = new Role("user");
             Role adminRole = new Role("admin");
@@ -68,32 +68,33 @@ class FacadeTest {
 
             em.getTransaction().commit();
 
-        } finally {
-            em.close();
-        }
+
     }
 
     @AfterEach
     void tearDown() {
+        em.close();
         emf.close();
     }
 
-//    @Test
-//    void likedMoviesByUserIdTest() {
-//        System.out.println("Test Liked movies by user id");
-//        List<Movie> expected = new ArrayList<>();
-//        expected.add(new Movie("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
-//        expected.add(new Movie("Spider-Man: No Way Home","2021","https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg","8.4","2h 28m"));
-//        List<Movie> actual = facade.likedMoviesByUserId(2L);
-//
-//    }
+    @Test
+    void likedMoviesByUserIdTest() {
+        System.out.println("Test Liked movies by user id");
+        List<MovieDTO> expected = new ArrayList<>();
+        expected.add(new MovieDTO("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
+        expected.add(new MovieDTO("Spider-Man: No Way Home","2021","https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg","8.4","2h 28m"));
+
+        List<MovieDTO> actual = facade.likedMoviesByUserId(3L);
+
+        assertEquals(expected,actual);
+    }
 
     @Test
     void getAllMovies(){
         System.out.println("Test getAllMovies()");
         int expected = 4;
         int actual = facade.getAllMovies().size();
-        assertEquals(expected, actual);
 
+        assertEquals(expected, actual);
     }
 }
