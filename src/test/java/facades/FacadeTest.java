@@ -4,9 +4,7 @@ import dtos.MovieDTO;
 import entities.Movie;
 import entities.Role;
 import entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -19,12 +17,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FacadeTest {
-    EntityManagerFactory emf;
-    EntityManager em;
+    static EntityManagerFactory emf;
+    static EntityManager em;
     Facade facade = Facade.getFacade(EMF_Creator.createEntityManagerFactoryForTest());
 
-    @BeforeEach
-    void setUp() {
+
+
+    @BeforeAll
+    public static void setUp(){
+
         emf = EMF_Creator.createEntityManagerFactoryForTest();
         em = emf.createEntityManager();
 
@@ -45,37 +46,38 @@ class FacadeTest {
         user3.addMovie(uncharted);
 
 
-            em.getTransaction().begin();
-            Role userRole = new Role("user");
-            Role adminRole = new Role("admin");
-            user1.addRole(userRole);
-            user2.addRole(userRole);
-            user3.addRole(userRole);
-            admin.addRole(adminRole);
-            both.addRole(userRole);
-            both.addRole(adminRole);
-            em.persist(userRole);
-            em.persist(adminRole);
-            em.persist(user1);
-            em.persist(user2);
-            em.persist(user3);
-            em.persist(admin);
-            em.persist(both);
-            em.persist(uncharted);
-            em.persist(peacemaker);
-            em.persist(theNorthman);
-            em.persist(spiderManNoWayHome);
+        em.getTransaction().begin();
+        Role userRole = new Role("user");
+        Role adminRole = new Role("admin");
+        user1.addRole(userRole);
+        user2.addRole(userRole);
+        user3.addRole(userRole);
+        admin.addRole(adminRole);
+        both.addRole(userRole);
+        both.addRole(adminRole);
+        em.persist(userRole);
+        em.persist(adminRole);
+        em.persist(user1);
+        em.persist(user2);
+        em.persist(user3);
+        em.persist(admin);
+        em.persist(both);
+        em.persist(uncharted);
+        em.persist(peacemaker);
+        em.persist(theNorthman);
+        em.persist(spiderManNoWayHome);
 
-            em.getTransaction().commit();
-
-
+        em.getTransaction().commit();
     }
 
-    @AfterEach
-    void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         em.close();
         emf.close();
     }
+
+
+
 
     @Test
     void likedMoviesByUserIdTest() {
@@ -84,7 +86,7 @@ class FacadeTest {
         expected.add(new MovieDTO("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
         expected.add(new MovieDTO("Spider-Man: No Way Home","2021","https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg","8.4","2h 28m"));
 
-        List<MovieDTO> actual = facade.likedMoviesByUserId(3L);
+        List<MovieDTO> actual = facade.likedMoviesByUserId(2L);
 
         assertEquals(expected,actual);
     }
