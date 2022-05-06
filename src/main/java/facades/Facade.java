@@ -29,10 +29,7 @@ public class Facade implements Ifacade {
 
     @Override
     public List<Movie> likedMoviesByUserId(Long id) {
-        EntityManager em = emf.createEntityManager();
-        List<Long> query= em.createQuery("select m from Movie m left join fetch m.userList ul where ul.id=:id")
-                .setParameter("id",id)
-                .getResultList();
+
         return null;
     }
 
