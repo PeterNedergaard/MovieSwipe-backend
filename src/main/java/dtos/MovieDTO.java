@@ -2,10 +2,7 @@ package dtos;
 
 import entities.Movie;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class MovieDTO {
 
@@ -86,5 +83,18 @@ public class MovieDTO {
                 ", rating='" + rating + '\'' +
                 ", duration='" + duration + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MovieDTO movieDTO = (MovieDTO) o;
+        return Objects.equals(title, movieDTO.title) && Objects.equals(releaseYear, movieDTO.releaseYear) && Objects.equals(imgUrl, movieDTO.imgUrl) && Objects.equals(rating, movieDTO.rating) && Objects.equals(duration, movieDTO.duration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, releaseYear, imgUrl, rating, duration);
     }
 }

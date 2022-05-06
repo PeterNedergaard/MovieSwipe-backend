@@ -1,7 +1,9 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entities.User;
+import facades.Facade;
 import utils.EMF_Creator;
 import utils.ParallelJokes;
 
@@ -12,10 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -24,6 +23,9 @@ import java.util.concurrent.ExecutionException;
 public class Resource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Facade facade = Facade.getFacade(EMF_Creator.createEntityManagerFactory());
+
     @Context
     private UriInfo context;
 
@@ -75,8 +77,6 @@ public class Resource {
     @Path("jokes")
     public String getJokes() {
 
-        Gson gson = new Gson();
-
         List<String> jokeList = new ArrayList<>();
 
         try{
@@ -87,4 +87,17 @@ public class Resource {
 
         return gson.toJson(jokeList);
     }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("movies")
+    public Response getAllMovies() {
+
+        return Response
+                .ok()
+                .entity(gson.toJson(facade.getAllMovies()))
+                .build();
+    }
+
 }

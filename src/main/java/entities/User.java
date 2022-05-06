@@ -18,8 +18,6 @@ public class User implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id")
   private Long id;
-
-
   @Basic(optional = false)
   @NotNull
   @Column(name = "user_name", length = 25)
@@ -35,7 +33,7 @@ public class User implements Serializable {
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
           name ="user_movie",
           joinColumns = @JoinColumn(name="user_id"),
@@ -104,6 +102,10 @@ public class User implements Serializable {
 
   public List<Movie> getMovieList() {
     return movieList;
+  }
+
+  public void setMovieList(List<Movie> movieList) {
+    this.movieList = movieList;
   }
 
   public Long getId() {

@@ -1,6 +1,7 @@
 import entities.Movie;
 import entities.Role;
 import entities.User;
+import facades.Facade;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
