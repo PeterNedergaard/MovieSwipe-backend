@@ -20,6 +20,7 @@ public class Movie {
     private String duration;
 
 
+
     @ManyToMany(mappedBy = "movieList")
     private List<User> userList = new ArrayList<>();
 
