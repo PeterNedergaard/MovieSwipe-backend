@@ -102,9 +102,9 @@ public class Resource {
                 .build();
     }
     @GET
-    @Path("/likeMovies/{id}")
+    @Path("/likedmovies/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getPersonsByZipcode(@PathParam("id") Long id)throws IdNotFoundException
+    public Response getLikedMoviesByUserId(@PathParam("id") Long id)throws IdNotFoundException
     {
         return Response
                 .ok()
