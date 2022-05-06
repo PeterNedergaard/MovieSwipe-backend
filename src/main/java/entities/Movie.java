@@ -24,6 +24,9 @@ public class Movie {
     @ManyToMany(mappedBy = "movieList")
     private List<User> userList = new ArrayList<>();
 
+    @ManyToMany
+    private List <Dislike> dislikedListMovie = new ArrayList<>();
+
     public Movie(String title, String releaseDate, String imgUrl, String rating, String duration) {
         this.title = title;
         this.releaseYear = releaseDate;
@@ -31,6 +34,9 @@ public class Movie {
         this.rating = rating;
         this.duration = duration;
     }
+
+
+
 
     public Movie() {
     }
@@ -96,5 +102,9 @@ public class Movie {
     @Override
     public int hashCode() {
         return Objects.hash(title, releaseYear, imgUrl, rating, duration);
+    }
+
+    public void addDislike(Dislike dislike) {
+        this.dislikedListMovie.add(dislike);
     }
 }

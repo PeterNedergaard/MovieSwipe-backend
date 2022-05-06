@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Dislike {
@@ -10,39 +11,44 @@ public class Dislike {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long movieId;
-    private Long userId;
+    @ManyToMany(mappedBy = "dislikedListMovie")
+    private List<Movie> dislikedMovieList;
+
+    @ManyToMany(mappedBy = "dislikedListUser")
+    private List<User> dislikedMoviesUserList;
+
+    public void addUser(User user){
+        this.dislikedMoviesUserList.add(user);
+        user.addDislike(this);
+    }
+
+    public void addMovie(Movie movie){
+        this.dislikedMovieList.add(movie);
+        movie.addDislike(this);
+    }
 
 
-    public Dislike(Long movieId, Long userId) {
-        this.movieId = movieId;
-        this.userId = userId;
+    public Dislike(List<Movie> dislikedMovieList, List<User> dislikedMoviesUserList) {
+        this.dislikedMovieList = dislikedMovieList;
+        this.dislikedMoviesUserList = dislikedMoviesUserList;
     }
 
     public Dislike() {
     }
 
-    public Long getMovieId() {
-        return movieId;
+    public List<Movie> getDislikedMovieList() {
+        return dislikedMovieList;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setDislikedMovieList(List<Movie> dislikedMovieList) {
+        this.dislikedMovieList = dislikedMovieList;
     }
 
-    public Long getUserId() {
-        return userId;
+    public List<User> getDislikedMoviesUserList() {
+        return dislikedMoviesUserList;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setDislikedMoviesUserList(List<User> userList) {
+        this.dislikedMoviesUserList = userList;
     }
 }

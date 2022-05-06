@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.User;
+import errorhandling.IdNotFoundException;
 import facades.Facade;
 import utils.EMF_Creator;
 import utils.ParallelJokes;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.*;
 import java.util.ArrayList;
@@ -99,5 +101,15 @@ public class Resource {
                 .entity(gson.toJson(facade.getAllMovies()))
                 .build();
     }
+    @GET
+    @Path("/likedmovies/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getLikedMoviesByUserId(@PathParam("id") Long id)throws IdNotFoundException
+    {
+        return Response
+                .ok()
+                .entity(gson.toJson(facade.likedMoviesByUserId(id)))
+                .build();
 
+    }
 }
