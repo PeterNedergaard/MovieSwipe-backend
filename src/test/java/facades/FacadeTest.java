@@ -101,13 +101,13 @@ class FacadeTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     void getUserIdByUserName(){
-        System.out.println("Long getUserIdByUserName(String userNam)");
-        Long expected= facade.getUserByName("Rabee").getId();
-        Long actual= facade.getUserIdByUserName("Rabee");
+        System.out.println("Get user ID by username");
+        Long expected = facade.getUserByName("Rabee").getId();
+        Long actual = facade.getUserIdByUserName("Rabee");
+
         assertEquals(expected, actual);
-
-
     }
 }

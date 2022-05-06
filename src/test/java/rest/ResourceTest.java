@@ -64,25 +64,25 @@ class ResourceTest {
 
     @BeforeEach
     void setUp() {
-        EntityManager em = emf.createEntityManager();
+//        EntityManager em = emf.createEntityManager();
 
-        movie1 = new Movie("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m");
-        movie2 = new Movie("Peacemaker","2022","https://m.media-amazon.com/images/M/MV5BODk2NjAyOWMtM2FjZC00MjZhLTkxMjQtZTM3NjJlYTE5MDdlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg","8.4","40m");
-
-
-        try {
-            em.getTransaction().begin();
-
-            em.persist(movie1);
-            em.persist(movie2);
-
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-
-        movie1DTO = new MovieDTO(movie1);
-        movie1DTO = new MovieDTO(movie2);
+//        movie1 = new Movie("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m");
+//        movie2 = new Movie("Peacemaker","2022","https://m.media-amazon.com/images/M/MV5BODk2NjAyOWMtM2FjZC00MjZhLTkxMjQtZTM3NjJlYTE5MDdlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg","8.4","40m");
+//
+//
+//        try {
+//            em.getTransaction().begin();
+//
+//            em.persist(movie1);
+//            em.persist(movie2);
+//
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
+//
+//        movie1DTO = new MovieDTO(movie1);
+//        movie1DTO = new MovieDTO(movie2);
 
     }
 
@@ -91,30 +91,30 @@ class ResourceTest {
     }
 
 
-//    @Test
-//    public void testServerIsUp() {
-//        System.out.println("Testing is server up");
-//        given()
-//                .contentType("application/json")
-//                .when()
-//                .get("/info")
-//                .then()
-//                .statusCode(200);
-//    }
-//
-//
-//    @Test
-//    void getAllMovies() {
-//        System.out.println("Testing to get all movies");
-//        List<MovieDTO> actualMovieDTOList = given()
-//                .contentType("application/json")
-//                .when()
-//                .get("/info/movies")
-//                .then()
-//                .extract().body().jsonPath().getList("", MovieDTO.class);
-//        assertThat(actualMovieDTOList, containsInAnyOrder(movie1DTO,movie2DTO));
-//
-//    }
+    @Test
+    public void testServerIsUp() {
+        System.out.println("Testing is server up");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("/info")
+                .then()
+                .statusCode(200);
+    }
+
+
+    @Test
+    void getAllMovies() {
+        System.out.println("Testing to get all movies");
+        List<MovieDTO> actualMovieDTOList = given()
+                .contentType("application/json")
+                .when()
+                .get("/info/movies")
+                .then()
+                .extract().body().jsonPath().getList("", MovieDTO.class);
+        assertThat(actualMovieDTOList, containsInAnyOrder(movie1DTO,movie2DTO));
+
+    }
 
 
 }
