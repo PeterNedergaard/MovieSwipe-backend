@@ -13,3 +13,6 @@ GET http://localhost:8080/CA2backend_war_exploded/api/all
 
 ###
 GET http://localhost:8080/CA2backend_war_exploded/api/info/jokes
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/likeMovies/7

@@ -5,6 +5,7 @@ import entities.Dislike;
 import entities.Movie;
 import entities.Role;
 import entities.User;
+import errorhandling.IdNotFoundException;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 
@@ -81,7 +82,7 @@ class FacadeTest {
 
 
     @Test
-    void likedMoviesByUserIdTest() {
+    void likedMoviesByUserIdTest() throws IdNotFoundException {
         System.out.println("Test Liked movies by user id");
         List<MovieDTO> expected = new ArrayList<>();
         expected.add(new MovieDTO("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
