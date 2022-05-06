@@ -3,6 +3,7 @@ package facades;
 import dtos.MovieDTO;
 import entities.Movie;
 import entities.User;
+import errorhandling.IdNotFoundException;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -29,12 +30,15 @@ public class Facade implements Ifacade {
 
 
     @Override
-    public List<MovieDTO> likedMoviesByUserId(Long id) {
+    public List<MovieDTO> likedMoviesByUserId(Long id) throws IdNotFoundException {
         EntityManager em = emf.createEntityManager();
 
         User user = em.find(User.class,id);
+        if (user.getId()== null)
 
-        return MovieDTO.getMovieDTOS(user.getMovieList());
+            throw new IdNotFoundException("id not found");
+        System.out.println(user.getId());
+           return MovieDTO.getMovieDTOS(user.getMovieList());
     }
 
 
