@@ -12,8 +12,8 @@ public class Generate {
 
     public static void main(String[] args) {
 
-//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactoryForTest();
-        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactoryForTest();
+//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
 
         Movie uncharted = new Movie("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m");

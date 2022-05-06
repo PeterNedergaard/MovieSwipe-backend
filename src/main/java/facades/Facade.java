@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.MovieDTO;
+import entities.Dislike;
 import entities.Movie;
 import entities.User;
 import utils.EMF_Creator;
@@ -27,12 +28,11 @@ public class Facade implements Ifacade {
     }
 
 
-
     @Override
     public List<MovieDTO> likedMoviesByUserId(Long id) {
         EntityManager em = emf.createEntityManager();
 
-        User user = em.find(User.class,id);
+        User user = em.find(User.class, id);
 
         return MovieDTO.getMovieDTOS(user.getMovieList());
     }
@@ -51,10 +51,10 @@ public class Facade implements Ifacade {
     public User getUserByName(String Name) {
         EntityManager em = emf.createEntityManager();
 
-        List<User> userList = em.createQuery("SELECT u FROM User u",User.class).getResultList();
+        List<User> userList = em.createQuery("SELECT u FROM User u", User.class).getResultList();
 
         for (User u : userList) {
-            if (u.getUserName().equals(Name)){
+            if (u.getUserName().equals(Name)) {
                 return u;
             }
         }
@@ -66,11 +66,25 @@ public class Facade implements Ifacade {
     public Long getUserIdByUserName(String userName) {
         EntityManager em = emf.createEntityManager();
 
-        Long userId = em.createQuery("SELECT u FROM User u where u.userName=:userName",User.class)
+        Long userId = em.createQuery("SELECT u FROM User u where u.userName=:userName", User.class)
                 .setParameter("userName", userName).getSingleResult().getId();
 
 
         return userId;
     }
 
+    @Override
+    public void addDisliked(String userName, Long movieId) {
+        EntityManager em = emf.createEntityManager();
+        Dislike dislike = new Dislike(movieId, getUserIdByUserName(userName));
+
+        try {
+            em.getTransaction().begin();
+            em.persist(dislike);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+    }
 }

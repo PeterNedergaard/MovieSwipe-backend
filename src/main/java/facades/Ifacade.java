@@ -12,6 +12,7 @@ public interface Ifacade {
     List<MovieDTO> getAllMovies();
     User getUserByName(String Name);
     Long getUserIdByUserName(String userName);
+    void addDisliked (String userName, Long movieId);
 
 
 }

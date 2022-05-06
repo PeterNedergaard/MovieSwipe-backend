@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.MovieDTO;
+import entities.Dislike;
 import entities.Movie;
 import entities.Role;
 import entities.User;
@@ -109,5 +110,16 @@ class FacadeTest {
         Long actual = facade.getUserIdByUserName("Rabee");
 
         assertEquals(expected, actual);
+    }
+    @Test
+    void addDislikedMovieTest(){
+        System.out.println("Add disliked movie to disliked movies list");
+        int expected = 3;
+        facade.addDisliked("Rabee",1L);
+        facade.addDisliked("Rabee",2L);
+        facade.addDisliked("Rabee",3L);
+        int actual = em.createQuery("select d from Dislike d", Dislike.class).getResultList().size();
+
+        assertEquals(expected,actual);
     }
 }
