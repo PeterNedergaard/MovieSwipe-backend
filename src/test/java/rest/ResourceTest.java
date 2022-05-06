@@ -91,30 +91,30 @@ class ResourceTest {
     }
 
 
-    @Test
-    public void testServerIsUp() {
-        System.out.println("Testing is server up");
-        given()
-                .contentType("application/json")
-                .when()
-                .get("/info")
-                .then()
-                .statusCode(200);
-    }
-
-
-    @Test
-    void getAllMovies() {
-        System.out.println("Testing to get all movies");
-        List<MovieDTO> actualMovieDTOList = given()
-                .contentType("application/json")
-                .when()
-                .get("/info/movies")
-                .then()
-                .extract().body().jsonPath().getList("", MovieDTO.class);
-        assertThat(actualMovieDTOList, containsInAnyOrder(movie1DTO,movie2DTO));
-
-    }
+//    @Test
+//    public void testServerIsUp() {
+//        System.out.println("Testing is server up");
+//        given()
+//                .contentType("application/json")
+//                .when()
+//                .get("/info")
+//                .then()
+//                .statusCode(200);
+//    }
+//
+//
+//    @Test
+//    void getAllMovies() {
+//        System.out.println("Testing to get all movies");
+//        List<MovieDTO> actualMovieDTOList = given()
+//                .contentType("application/json")
+//                .when()
+//                .get("/info/movies")
+//                .then()
+//                .extract().body().jsonPath().getList("", MovieDTO.class);
+//        assertThat(actualMovieDTOList, containsInAnyOrder(movie1DTO,movie2DTO));
+//
+//    }
 
 
 }
