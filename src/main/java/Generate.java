@@ -1,3 +1,4 @@
+import entities.Dislike;
 import entities.Movie;
 import entities.Role;
 import entities.User;
@@ -33,8 +34,6 @@ public class Generate {
 
 
 
-
-
         try {
             em.getTransaction().begin();
             Role userRole = new Role("user");
@@ -61,6 +60,22 @@ public class Generate {
         } finally {
             em.close();
         }
+
+//        em = emf.createEntityManager();
+//
+//        try {
+//            em.getTransaction().begin();
+//
+//            Dislike dislike1 = new Dislike(1L, 1L);
+//            Dislike dislike2 = new Dislike(1L, 2L);
+//
+//            em.persist(dislike1);
+//            em.persist(dislike2);
+//
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
 
     }
 
