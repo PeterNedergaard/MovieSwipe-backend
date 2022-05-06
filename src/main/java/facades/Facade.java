@@ -61,4 +61,17 @@ public class Facade implements Ifacade {
 
         return null;
     }
+
+    @Override
+    public Long getUserIdByUserName(String userName) {
+        EntityManager em = emf.createEntityManager();
+
+        Long userId = em.createQuery("SELECT u FROM User u where u.userName=:userName",User.class).
+                setParameter("userName", userName).getSingleResult().getId();
+
+
+
+        return userId;
+    }
+
 }
