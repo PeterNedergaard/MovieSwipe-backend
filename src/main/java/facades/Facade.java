@@ -81,15 +81,15 @@ public class Facade implements Ifacade {
     @Override
     public void addDisliked(String userName, Long movieId) {
         EntityManager em = emf.createEntityManager();
-        Dislike dislike = new Dislike(movieId, getUserIdByUserName(userName));
-
-        try {
-            em.getTransaction().begin();
-            em.persist(dislike);
-            em.getTransaction().commit();
-
-        } finally {
-            em.close();
-        }
+//        Dislike dislike = new Dislike(movieId, getUserIdByUserName(userName));
+//
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(dislike);
+//            em.getTransaction().commit();
+//
+//        } finally {
+//            em.close();
+//        }
     }
 }

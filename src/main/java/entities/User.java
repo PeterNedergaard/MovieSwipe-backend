@@ -40,6 +40,9 @@ public class User implements Serializable {
           inverseJoinColumns = @JoinColumn(name="movie_id"))
   private List<Movie> movieList = new ArrayList<>();
 
+  @ManyToMany
+  private List <Dislike> dislikedListUser = new ArrayList<>();
+
 
   public void addMovie(Movie movie){
     this.movieList.add(movie);
@@ -114,5 +117,9 @@ public class User implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public void addDislike(Dislike dislike) {
+    this.dislikedListUser.add(dislike);
   }
 }
