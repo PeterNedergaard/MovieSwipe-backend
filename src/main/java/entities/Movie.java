@@ -1,7 +1,6 @@
 package entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,12 +19,16 @@ public class Movie {
     private String duration;
 
 
+    @OneToMany(mappedBy = "movie")
+    List<UserMovie> userMovieList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "movieList")
-    private List<User> userList = new ArrayList<>();
+//    @ManyToMany(mappedBy = "movieList")
+//    private List<User> userList = new ArrayList<>();
+//
+//    @ManyToMany
+//    private List <Dislike> dislikedListMovie = new ArrayList<>();
 
-    @ManyToMany
-    private List <Dislike> dislikedListMovie = new ArrayList<>();
+
 
     public Movie(String title, String releaseDate, String imgUrl, String rating, String duration) {
         this.title = title;
@@ -42,10 +45,25 @@ public class Movie {
     }
 
 
-    public void addUser(User user){
-        this.userList.add(user);
+//    public void addUser(User user){
+//        this.userList.add(user);
+//    }
+
+    public void addToUserMovieList(UserMovie userMovie){
+        this.userMovieList.add(userMovie);
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<UserMovie> getUserMovieList() {
+        return userMovieList;
+    }
+
+    public void setUserMovieList(List<UserMovie> userMovieList) {
+        this.userMovieList = userMovieList;
+    }
 
     public Long getId() {
         return id;
@@ -104,7 +122,7 @@ public class Movie {
         return Objects.hash(title, releaseYear, imgUrl, rating, duration);
     }
 
-    public void addDislike(Dislike dislike) {
-        this.dislikedListMovie.add(dislike);
-    }
+//    public void addDislike(UserMovie userMovie) {
+//        this.dislikedListMovie.add(userMovie);
+//    }
 }

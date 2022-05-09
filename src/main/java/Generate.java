@@ -1,8 +1,7 @@
-import entities.Dislike;
 import entities.Movie;
 import entities.Role;
 import entities.User;
-import facades.Facade;
+import entities.UserMovie;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -27,23 +26,31 @@ public class Generate {
         User user3 = new User("Mohammed", "test123");
         User admin = new User("admin", "test123");
         User both = new User("user_admin", "test123");
-        user1.addMovie(uncharted);
-        user1.addMovie(peacemaker);
-        user1.addMovie(spiderManNoWayHome);
-        user2.addMovie(uncharted);
-        user2.addMovie(spiderManNoWayHome);
-        user3.addMovie(uncharted);
 
-        List<Movie> movies = new ArrayList<>();
-        movies.add(uncharted);
-        movies.add(peacemaker);
+        UserMovie userMovie1 = new UserMovie(uncharted,true);
+        UserMovie userMovie2 = new UserMovie(peacemaker,false);
+        UserMovie userMovie3 = new UserMovie(spiderManNoWayHome,true);
+        UserMovie userMovie4 = new UserMovie(uncharted,true);
+        UserMovie userMovie5 = new UserMovie(spiderManNoWayHome,false);
+        UserMovie userMovie6 = new UserMovie(uncharted,false);
 
-        List<User> users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
+        user1.addToUserMovieList(userMovie1);
+        user1.addToUserMovieList(userMovie2);
+        user1.addToUserMovieList(userMovie3);
+        user2.addToUserMovieList(userMovie4);
+        user2.addToUserMovieList(userMovie5);
+        user3.addToUserMovieList(userMovie6);
+
+//        user1.addMovie(uncharted);
+//        user1.addMovie(peacemaker);
+//        user1.addMovie(spiderManNoWayHome);
+//        user2.addMovie(uncharted);
+//        user2.addMovie(spiderManNoWayHome);
+//        user3.addMovie(uncharted);
 
 
-        Dislike dislike = new Dislike(movies,users);
+
+        //Dislike dislike = new Dislike(movies,users);
 //        dislike.addMovie(uncharted);
 //        dislike.addUser(user3);
 //        dislike.addMovie(peacemaker);
@@ -71,7 +78,13 @@ public class Generate {
             em.persist(peacemaker);
             em.persist(theNorthman);
             em.persist(spiderManNoWayHome);
-            em.persist(dislike);
+//            em.persist(dislike);
+            em.persist(userMovie1);
+            em.persist(userMovie2);
+            em.persist(userMovie3);
+            em.persist(userMovie4);
+            em.persist(userMovie5);
+            em.persist(userMovie6);
 
 
             em.getTransaction().commit();

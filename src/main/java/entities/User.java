@@ -33,21 +33,25 @@ public class User implements Serializable {
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(
-          name ="user_movie",
-          joinColumns = @JoinColumn(name="user_id"),
-          inverseJoinColumns = @JoinColumn(name="movie_id"))
-  private List<Movie> movieList = new ArrayList<>();
 
-  @ManyToMany
-  private List <Dislike> dislikedListUser = new ArrayList<>();
+  @OneToMany(mappedBy = "user")
+  private List<UserMovie> userMovieList = new ArrayList<>();
+
+//  @ManyToMany(fetch = FetchType.EAGER)
+//  @JoinTable(
+//          name ="user_movie",
+//          joinColumns = @JoinColumn(name="user_id"),
+//          inverseJoinColumns = @JoinColumn(name="movie_id"))
+//  private List<Movie> movieList = new ArrayList<>();
+//
+//  @ManyToMany
+//  private List <Dislike> dislikedListUser = new ArrayList<>();
 
 
-  public void addMovie(Movie movie){
-    this.movieList.add(movie);
-    movie.addUser(this);
-  }
+//  public void addMovie(Movie movie){
+//    this.movieList.add(movie);
+//    movie.addUser(this);
+//  }
 
 
   public List<String> getRolesAsStrings() {
@@ -74,6 +78,18 @@ public class User implements Serializable {
     this.userPass = BCrypt.hashpw(userPass,BCrypt.gensalt());
   }
 
+  public void addToUserMovieList(UserMovie userMovie){
+    userMovie.setUser(this);
+    this.userMovieList.add(userMovie);
+  }
+
+  public List<UserMovie> getUserMovieList() {
+    return userMovieList;
+  }
+
+  public void setUserMovieList(List<UserMovie> userMovieList) {
+    this.userMovieList = userMovieList;
+  }
 
   public String getUserName() {
     return userName;
@@ -103,13 +119,13 @@ public class User implements Serializable {
     roleList.add(userRole);
   }
 
-  public List<Movie> getMovieList() {
-    return movieList;
-  }
-
-  public void setMovieList(List<Movie> movieList) {
-    this.movieList = movieList;
-  }
+//  public List<Movie> getMovieList() {
+//    return movieList;
+//  }
+//
+//  public void setMovieList(List<Movie> movieList) {
+//    this.movieList = movieList;
+//  }
 
   public Long getId() {
     return id;
@@ -119,7 +135,7 @@ public class User implements Serializable {
     this.id = id;
   }
 
-  public void addDislike(Dislike dislike) {
-    this.dislikedListUser.add(dislike);
-  }
+//  public void addDislike(UserMovie userMovie) {
+//    this.dislikedListUser.add(userMovie);
+//  }
 }
