@@ -2,7 +2,12 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import dtos.MovieDTO;
+import entities.Movie;
 import entities.User;
+import errorhandling.API_Exception;
 import errorhandling.IdNotFoundException;
 import facades.Facade;
 import utils.EMF_Creator;
@@ -12,10 +17,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +103,7 @@ public class Resource {
                 .entity(gson.toJson(facade.getAllMovies()))
                 .build();
     }
+
     @GET
     @Path("likedmovies/{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -110,6 +113,36 @@ public class Resource {
                 .ok()
                 .entity(gson.toJson(facade.likedMoviesByUserId(id)))
                 .build();
+
+    }
+
+    @POST
+    @Path("likeordislike")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void movieInteraction(String jsonString) throws API_Exception {
+
+        EntityManager em = EMF.createEntityManager();
+
+        Long movieId;
+        String userName;
+        boolean isLiked;
+
+        User user;
+        Movie movie;
+
+        try {
+            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
+            movieId = Long.valueOf(json.get("movieid").getAsString());
+            userName = json.get("username").getAsString();
+            isLiked = Boolean.parseBoolean(json.get("isliked").getAsString());
+
+            user = facade.getUserByName(userName);
+            movie = em.find(Movie.class,movieId);
+
+        } catch (Exception e) {
+            throw new API_Exception("Malformed JSON Suplied",400,e);
+        }
 
     }
 }

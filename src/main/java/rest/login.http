@@ -16,3 +16,12 @@ GET http://localhost:8080/CA2backend_war_exploded/api/info/jokes
 
 ###
 GET http://localhost:8080/CA2backend_war_exploded/api/info/likeMovies/7
+
+###
+POST http://localhost:8080/CA2backend_war_exploded/api/info/likeordislike
+
+{
+movieid: "1",
+username: "Rabee",
+isliked: "true"
+}

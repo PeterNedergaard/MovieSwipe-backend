@@ -100,7 +100,6 @@ class FacadeTest {
         System.out.println("Test Liked movies by user id");
         List<MovieDTO> expected = new ArrayList<>();
         expected.add(new MovieDTO("Uncharted","2022","https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_.jpg","6.4","1h 56m"));
-        expected.add(new MovieDTO("Spider-Man: No Way Home","2021","https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg","8.4","2h 28m"));
 
         User user = facade.getUserByName("Rabee");
 
@@ -126,15 +125,17 @@ class FacadeTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
-    void addDislikedMovieTest(){
-//        System.out.println("Add disliked movie to disliked movies list");
-//        int expected = 3;
-//        facade.addDisliked("Rabee",1L);
-//        facade.addDisliked("Rabee",2L);
-//        facade.addDisliked("Rabee",3L);
-//        int actual = em.createQuery("select d from Dislike d", Dislike.class).getResultList().size();
-//
-//        assertEquals(expected,actual);
+    void addMovieInteractionTest(){
+        System.out.println("Add a movie interaction");
+
+        User user = em.find(User.class,5L);
+        Movie movie = em.find(Movie.class,1L);
+
+        Movie expected = movie;
+        Movie actual = facade.addMovieInteraction(movie,user,true);
+
+        assertEquals(expected,actual);
     }
 }

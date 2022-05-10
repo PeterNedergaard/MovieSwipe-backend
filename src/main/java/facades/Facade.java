@@ -9,6 +9,7 @@ import errorhandling.IdNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Facade implements Ifacade {
@@ -33,7 +34,7 @@ public class Facade implements Ifacade {
     public List<MovieDTO> likedMoviesByUserId(Long id) throws IdNotFoundException {
         EntityManager em = emf.createEntityManager();
 
-
+        List<Movie> movieList = new ArrayList<>();
         User user = em.find(User.class,id);
 
         if (user.getId()== null){
@@ -44,8 +45,13 @@ public class Facade implements Ifacade {
                 .setParameter("id", id).getResultList();
 
 
+        for (UserMovie um : userMovieList) {
+            if (um.isLiked()){
+                movieList.add(um.getMovie());
+            }
+        }
 
-        return MovieDTO.getMovieDTOS(user.getMovieList());
+        return MovieDTO.getMovieDTOS(movieList);
     }
 
 
@@ -85,17 +91,25 @@ public class Facade implements Ifacade {
     }
 
     @Override
-    public void addDisliked(String userName, Long movieId) {
+    public Movie addMovieInteraction(Movie movie, User user, boolean isLiked){
         EntityManager em = emf.createEntityManager();
-//        Dislike dislike = new Dislike(movieId, getUserIdByUserName(userName));
-//
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(dislike);
-//            em.getTransaction().commit();
-//
-//        } finally {
-//            em.close();
-//        }
+
+        UserMovie userMovie = new UserMovie(user,movie,isLiked);
+
+        try{
+          em.getTransaction().begin();
+
+          em.persist(userMovie);
+
+          em.getTransaction().commit();
+        } finally {
+         em.close();
+        }
+
+        return movie;
     }
+
+
+
+
 }
