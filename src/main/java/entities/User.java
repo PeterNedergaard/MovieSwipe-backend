@@ -37,21 +37,11 @@ public class User implements Serializable {
   @OneToMany(mappedBy = "user")
   private List<UserMovie> userMovieList = new ArrayList<>();
 
-//  @ManyToMany(fetch = FetchType.EAGER)
-//  @JoinTable(
-//          name ="user_movie",
-//          joinColumns = @JoinColumn(name="user_id"),
-//          inverseJoinColumns = @JoinColumn(name="movie_id"))
-//  private List<Movie> movieList = new ArrayList<>();
-//
-//  @ManyToMany
-//  private List <Dislike> dislikedListUser = new ArrayList<>();
+
+  @OneToMany(mappedBy = "user")
+  private List<UserRoom> userRoomList = new ArrayList<>();
 
 
-//  public void addMovie(Movie movie){
-//    this.movieList.add(movie);
-//    movie.addUser(this);
-//  }
 
 
   public List<String> getRolesAsStrings() {
@@ -81,6 +71,18 @@ public class User implements Serializable {
   public void addToUserMovieList(UserMovie userMovie){
     userMovie.setUser(this);
     this.userMovieList.add(userMovie);
+  }
+
+  public void addToUserRoomList(UserRoom userRoom){
+    this.userRoomList.add(userRoom);
+  }
+
+  public List<UserRoom> getUserRoomList() {
+    return userRoomList;
+  }
+
+  public void setUserRoomList(List<UserRoom> userRoomList) {
+    this.userRoomList = userRoomList;
   }
 
   public List<UserMovie> getUserMovieList() {
