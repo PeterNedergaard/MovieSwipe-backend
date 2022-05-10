@@ -15,7 +15,7 @@ GET http://localhost:8080/CA2backend_war_exploded/api/all
 GET http://localhost:8080/CA2backend_war_exploded/api/info/jokes
 
 ###
-GET http://localhost:8080/CA2backend_war_exploded/api/info/likeMovies/7
+GET http://localhost:8080/CA2backend_war_exploded/api/info/likedmovies/7
 
 ###
 POST http://localhost:8080/CA2backend_war_exploded/api/info/likeordislike
@@ -24,4 +24,20 @@ POST http://localhost:8080/CA2backend_war_exploded/api/info/likeordislike
 movieid: "1",
 username: "Rabee",
 isliked: "true"
+}
+
+###
+POST http://localhost:8080/CA2backend_war_exploded/api/info/createroom
+
+{
+username: "Rabee",
+roomcode: "12345"
+}
+
+###
+POST http://localhost:8080/CA2backend_war_exploded/api/info/addtoroom
+
+{
+username: "Peter",
+roomcode: "12345"
 }

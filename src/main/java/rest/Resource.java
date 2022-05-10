@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dtos.MovieDTO;
 import entities.Movie;
+import entities.Room;
 import entities.User;
 import errorhandling.API_Exception;
 import errorhandling.IdNotFoundException;
@@ -146,4 +147,58 @@ public class Resource {
 
         facade.addMovieInteraction(movie,user,isLiked);
     }
+
+    @POST
+    @Path("createroom")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void createRoom(String jsonString) throws API_Exception {
+        EntityManager em = EMF.createEntityManager();
+
+        User owner;
+        String roomCode;
+        String userName;
+
+        try {
+            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
+            userName = json.get("username").getAsString();
+            roomCode = json.get("roomcode").getAsString();
+
+            owner = facade.getUserByName(userName);
+
+        } catch (Exception e) {
+            throw new API_Exception("Malformed JSON Suplied", 400, e);
+        }
+        facade.createRoom(owner,roomCode);
+    }
+
+    @POST
+    @Path("addtoroom")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addUserToRoom(String jsonString) throws API_Exception {
+        EntityManager em = EMF.createEntityManager();
+
+        User user;
+        Room room;
+        String userName;
+        String roomCode;
+
+        try {
+            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
+            userName = json.get("username").getAsString();
+            roomCode = json.get("roomcode").getAsString();
+
+            user = facade.getUserByName(userName);
+            room= facade.getRoomByRoomCode(roomCode);
+
+        } catch (Exception e) {
+            throw new API_Exception("Malformed JSON Suplied", 400, e);
+        }
+        facade.addUserToRoom(user,room);
+    }
+
+
+
 }
+

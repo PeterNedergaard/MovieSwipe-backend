@@ -1,10 +1,7 @@
 package facades;
 
 import dtos.MovieDTO;
-import entities.Movie;
-import entities.Role;
-import entities.User;
-import entities.UserMovie;
+import entities.*;
 import errorhandling.IdNotFoundException;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
@@ -39,6 +36,15 @@ class FacadeTest {
         User user3 = new User("Mohammed", "test123");
         User admin = new User("admin", "test123");
         User both = new User("user_admin", "test123");
+        Room room1 = new Room(user1,"1234");
+        Room room2 = new Room(user2,"4321");
+
+        UserRoom userRoom1 = new UserRoom(user1,room1);
+        UserRoom userRoom2 = new UserRoom(user2, room2);
+
+        UserRoom userRoom3 = new UserRoom(user2,room1);
+        UserRoom userRoom4 = new UserRoom(user3,room1);
+        UserRoom userRoom5 = new UserRoom(user3,room2);
 
         UserMovie userMovie1 = new UserMovie(uncharted,true);
         UserMovie userMovie2 = new UserMovie(peacemaker,false);
@@ -82,6 +88,15 @@ class FacadeTest {
         em.persist(userMovie4);
         em.persist(userMovie5);
         em.persist(userMovie6);
+
+        em.persist(room1);
+        em.persist(room2);
+
+        em.persist(userRoom1);
+        em.persist(userRoom2);
+        em.persist(userRoom3);
+        em.persist(userRoom4);
+        em.persist(userRoom5);
 
         em.getTransaction().commit();
     }
@@ -137,5 +152,21 @@ class FacadeTest {
         Movie actual = facade.addMovieInteraction(movie,user,true);
 
         assertEquals(expected,actual);
+    }
+    @Test
+    void createRoom(){
+        System.out.println("Room createRoom(User owner, String roomCode)");
+        Room expected= new Room(em.find(User.class, 2L),"1234");
+        Room actual= facade.createRoom(em.find(User.class, 2L),"1234");
+        assertEquals(expected,actual);
+
+    }
+    @Test
+    void addUserToRoom(){
+        System.out.println("User addUserToRoom(User user,Room room)");
+        User expected = em.find(User.class,2L);
+        User actual= facade.addUserToRoom(em.find(User.class,2L),em.find(Room.class,2L));
+        assertEquals(expected,actual);
+
     }
 }

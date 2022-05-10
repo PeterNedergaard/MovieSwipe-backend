@@ -2,6 +2,7 @@ package facades;
 
 import dtos.MovieDTO;
 import entities.Movie;
+import entities.Room;
 import entities.User;
 import errorhandling.IdNotFoundException;
 
@@ -14,6 +15,8 @@ public interface Ifacade {
     User getUserByName(String Name);
     Long getUserIdByUserName(String userName);
     Movie addMovieInteraction(Movie movie, User user, boolean isLiked);
-
+    Room createRoom(User owner, String roomCode);
+    User addUserToRoom(User user,Room room);
+    Room getRoomByRoomCode(String roomCode);
 
 }

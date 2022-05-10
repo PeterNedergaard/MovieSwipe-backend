@@ -1,9 +1,7 @@
 package facades;
 
 import dtos.MovieDTO;
-import entities.Movie;
-import entities.User;
-import entities.UserMovie;
+import entities.*;
 import errorhandling.IdNotFoundException;
 
 import javax.persistence.EntityManager;
@@ -110,7 +108,45 @@ public class Facade implements Ifacade {
         return movie;
     }
 
+         public Room createRoom(User owner, String roomCode){
+             EntityManager em = emf.createEntityManager();
+             Room room = new Room(owner,roomCode);
+            try {
+
+                em.getTransaction().begin();
+                em.persist(room);
+                em.getTransaction().commit();
+            }
+            finally {
+                em.close();
+            }
 
 
+
+        return room;
+   }
+        public User addUserToRoom(User user,Room room){
+        EntityManager em= emf.createEntityManager();
+            UserRoom userRoom = new UserRoom(user,room);
+            try {
+
+                em.getTransaction().begin();
+                em.persist(userRoom);
+                em.getTransaction().commit();
+            }
+            finally {
+                em.close();
+            }
+        return user;
+        }
+
+        public Room getRoomByRoomCode(String roomCode){
+        EntityManager em= emf.createEntityManager();
+        Room room = em.createQuery("select r from Room r where r.roomCode= :roomCode", Room.class)
+            .setParameter("roomCode",roomCode).getSingleResult();
+
+
+        return room;
+        }
 
 }
