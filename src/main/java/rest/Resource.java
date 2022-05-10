@@ -144,5 +144,6 @@ public class Resource {
             throw new API_Exception("Malformed JSON Suplied",400,e);
         }
 
+        facade.addMovieInteraction(movie,user,isLiked);
     }
 }

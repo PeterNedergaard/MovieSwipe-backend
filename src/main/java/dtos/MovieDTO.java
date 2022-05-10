@@ -6,11 +6,21 @@ import java.util.*;
 
 public class MovieDTO {
 
+    private Long id;
     private String title;
     private String releaseYear;
     private String imgUrl;
     private String rating;
     private String duration;
+
+    public MovieDTO(Long id, String title, String releaseYear, String imgUrl, String rating, String duration) {
+        this.id = id;
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.imgUrl = imgUrl;
+        this.rating = rating;
+        this.duration = duration;
+    }
 
     public MovieDTO(String title, String releaseYear, String imgUrl, String rating, String duration) {
         this.title = title;
@@ -21,6 +31,7 @@ public class MovieDTO {
     }
 
     public MovieDTO(Movie movie) {
+        this.id = movie.getId();
         this.title = movie.getTitle();
         this.releaseYear = movie.getReleaseYear();
         this.imgUrl = movie.getImgUrl();
@@ -30,8 +41,18 @@ public class MovieDTO {
 
     public static List<MovieDTO> getMovieDTOS(List<Movie> movies){
         List<MovieDTO> movieDTOS = new ArrayList<>();
+
         movies.forEach(p->movieDTOS.add(new MovieDTO(p)));
+
         return movieDTOS;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

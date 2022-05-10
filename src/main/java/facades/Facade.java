@@ -58,9 +58,10 @@ public class Facade implements Ifacade {
     @Override
     public List<MovieDTO> getAllMovies() {
         EntityManager em = emf.createEntityManager();
+
         TypedQuery<Movie> query = em.createQuery("SELECT m FROM Movie m", Movie.class);
         List<Movie> movieList = query.getResultList();
-        System.out.println(movieList.toString());
+
         return MovieDTO.getMovieDTOS(movieList);
     }
 
