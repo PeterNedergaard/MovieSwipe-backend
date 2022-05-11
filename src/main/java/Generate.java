@@ -40,7 +40,7 @@ public class Generate {
         UserMovie userMovie3 = new UserMovie(spiderManNoWayHome,true);
         UserMovie userMovie4 = new UserMovie(uncharted,true);
         UserMovie userMovie5 = new UserMovie(spiderManNoWayHome,false);
-        UserMovie userMovie6 = new UserMovie(uncharted,false);
+        UserMovie userMovie6 = new UserMovie(uncharted,true);
 
         user1.addToUserMovieList(userMovie1);
         user1.addToUserMovieList(userMovie2);

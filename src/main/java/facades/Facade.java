@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Facade implements Ifacade {
 
@@ -146,14 +148,31 @@ public class Facade implements Ifacade {
         return room;
     }
 
-    public List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) {
+    public List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) throws IdNotFoundException {
 
-        EntityManager em=emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
         Room room = getRoomByRoomCode(roomCode);
-        List <UserRoom> userList= em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", UserRoom.class)
-                .setParameter("roomCode",roomCode).getResultList();
-        System.out.println(userList.toString());
-        return null;
-    }
+        List<Long> usersInRoom = em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", Long.class)
+                .setParameter("roomCode", roomCode).getResultList();
 
+        Set<MovieDTO> moviesList = new HashSet<>();
+
+        for (Long ur : usersInRoom) {
+            for (MovieDTO m : likedMoviesByUserId(ur)) {
+                moviesList.add(m);
+            }
+        }
+        List<MovieDTO> hashedList = new ArrayList<>(moviesList);
+
+        List<MovieDTO> resultList = new ArrayList<>();
+
+        for (MovieDTO movie : hashedList) {
+            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid and um.liked = true", Long.class)
+                    .setParameter("movieid", movie.getId()).getResultList();
+            if (usersWhoLikeSpecificMovie.containsAll(usersInRoom) == true) {
+                resultList.add(movie);
+            }
+        }
+        return resultList;
+    }
 }

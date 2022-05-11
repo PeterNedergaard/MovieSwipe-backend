@@ -18,6 +18,6 @@ public interface Ifacade {
     Room createRoom(User owner, String roomCode);
     User addUserToRoom(User user,Room room);
     Room getRoomByRoomCode(String roomCode);
-    List<MovieDTO> getLikedMoviesByRoomCode(String roomCode);
+    List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) throws IdNotFoundException;
 
 }
