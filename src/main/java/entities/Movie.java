@@ -22,12 +22,6 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     List<UserMovie> userMovieList = new ArrayList<>();
 
-//    @ManyToMany(mappedBy = "movieList")
-//    private List<User> userList = new ArrayList<>();
-//
-//    @ManyToMany
-//    private List <Dislike> dislikedListMovie = new ArrayList<>();
-
 
 
     public Movie(String title, String releaseDate, String imgUrl, String rating, String duration) {
@@ -44,10 +38,6 @@ public class Movie {
     public Movie() {
     }
 
-
-//    public void addUser(User user){
-//        this.userList.add(user);
-//    }
 
     public void addToUserMovieList(UserMovie userMovie){
         this.userMovieList.add(userMovie);
@@ -122,7 +112,4 @@ public class Movie {
         return Objects.hash(title, releaseYear, imgUrl, rating, duration);
     }
 
-//    public void addDislike(UserMovie userMovie) {
-//        this.dislikedListMovie.add(userMovie);
-//    }
 }

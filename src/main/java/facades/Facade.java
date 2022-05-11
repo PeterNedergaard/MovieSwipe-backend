@@ -64,6 +64,7 @@ public class Facade implements Ifacade {
         return MovieDTO.getMovieDTOS(movieList);
     }
 
+
     @Override
     public User getUserByName(String Name) {
         EntityManager em = emf.createEntityManager();
@@ -79,6 +80,7 @@ public class Facade implements Ifacade {
         return null;
     }
 
+
     @Override
     public Long getUserIdByUserName(String userName) {
         EntityManager em = emf.createEntityManager();
@@ -89,6 +91,7 @@ public class Facade implements Ifacade {
 
         return userId;
     }
+
 
     @Override
     public Movie addMovieInteraction(Movie movie, User user, boolean isLiked) {
@@ -109,6 +112,7 @@ public class Facade implements Ifacade {
         return movie;
     }
 
+
     public Room createRoom(User owner, String roomCode) {
         EntityManager em = emf.createEntityManager();
         Room room = new Room(owner, roomCode);
@@ -125,6 +129,7 @@ public class Facade implements Ifacade {
         return room;
     }
 
+
     public User addUserToRoom(User user, Room room) {
         EntityManager em = emf.createEntityManager();
         UserRoom userRoom = new UserRoom(user, room);
@@ -139,6 +144,7 @@ public class Facade implements Ifacade {
         return user;
     }
 
+
     public Room getRoomByRoomCode(String roomCode) {
         EntityManager em = emf.createEntityManager();
         Room room = em.createQuery("select r from Room r where r.roomCode= :roomCode", Room.class)
@@ -147,6 +153,7 @@ public class Facade implements Ifacade {
 
         return room;
     }
+
 
     public List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) throws IdNotFoundException {
 
@@ -162,17 +169,22 @@ public class Facade implements Ifacade {
                 moviesList.add(m);
             }
         }
+
         List<MovieDTO> hashedList = new ArrayList<>(moviesList);
 
         List<MovieDTO> resultList = new ArrayList<>();
 
+
         for (MovieDTO movie : hashedList) {
-            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid and um.liked = true", Long.class)
+            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid", Long.class)
                     .setParameter("movieid", movie.getId()).getResultList();
+
             if (usersWhoLikeSpecificMovie.containsAll(usersInRoom) == true) {
                 resultList.add(movie);
             }
         }
+
+
         return resultList;
     }
 

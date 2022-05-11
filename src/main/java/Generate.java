@@ -28,9 +28,11 @@ public class Generate {
         Room room1 = new Room(user1,"1234");
         Room room2 = new Room(user2,"4321");
 
+        //owners
         UserRoom userRoom1 = new UserRoom(user1,room1);
         UserRoom userRoom2 = new UserRoom(user2, room2);
 
+        //other members
         UserRoom userRoom3 = new UserRoom(user2,room1);
         UserRoom userRoom4 = new UserRoom(user3,room1);
         UserRoom userRoom5 = new UserRoom(user3,room2);
@@ -41,13 +43,17 @@ public class Generate {
         UserMovie userMovie4 = new UserMovie(uncharted,true);
         UserMovie userMovie5 = new UserMovie(spiderManNoWayHome,false);
         UserMovie userMovie6 = new UserMovie(uncharted,true);
+        UserMovie userMovie7 = new UserMovie(theNorthman,true);
+        UserMovie userMovie8 = new UserMovie(theNorthman,true);
 
         user1.addToUserMovieList(userMovie1);
         user1.addToUserMovieList(userMovie2);
         user1.addToUserMovieList(userMovie3);
         user2.addToUserMovieList(userMovie4);
         user2.addToUserMovieList(userMovie5);
+        user2.addToUserMovieList(userMovie7);
         user3.addToUserMovieList(userMovie6);
+        user3.addToUserMovieList(userMovie8);
 
 
 
@@ -81,6 +87,8 @@ public class Generate {
             em.persist(userMovie4);
             em.persist(userMovie5);
             em.persist(userMovie6);
+            em.persist(userMovie7);
+            em.persist(userMovie8);
 
             em.persist(room1);
             em.persist(room2);

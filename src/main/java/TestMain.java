@@ -9,7 +9,7 @@ public class TestMain {
         Facade facade = Facade.getFacade(EMF_Creator.createEntityManagerFactory());
 
         //facade.likedMoviesByUserId(1L);
-//        facade.getLikedMoviesByRoomCode("1234");
+        System.out.println(facade.getLikedMoviesByRoomCode("4321"));
     }
 
 }

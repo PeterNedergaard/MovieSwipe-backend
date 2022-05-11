@@ -41,3 +41,6 @@ POST http://localhost:8080/CA2backend_war_exploded/api/info/addtoroom
 username: "Peter",
 roomcode: "12345"
 }
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/roomlikes/4321

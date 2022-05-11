@@ -105,6 +105,7 @@ public class Resource {
                 .build();
     }
 
+
     @GET
     @Path("likedmovies/{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -116,6 +117,7 @@ public class Resource {
                 .build();
 
     }
+
 
     @POST
     @Path("likeordislike")
@@ -148,6 +150,7 @@ public class Resource {
         facade.addMovieInteraction(movie,user,isLiked);
     }
 
+
     @POST
     @Path("createroom")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -171,6 +174,7 @@ public class Resource {
         }
         facade.createRoom(owner,roomCode);
     }
+
 
     @POST
     @Path("addtoroom")
@@ -199,6 +203,20 @@ public class Resource {
     }
 
 
+    @GET
+    @Path("roomlikes/{roomcode}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getLikedMoviesByRoomCode(@PathParam("roomcode") String roomCode)throws IdNotFoundException
+    {
+
+        List<MovieDTO> result = facade.getLikedMoviesByRoomCode(roomCode);
+
+        return Response
+                .ok()
+                .entity(gson.toJson(result))
+                .build();
+
+    }
 
 }
 
