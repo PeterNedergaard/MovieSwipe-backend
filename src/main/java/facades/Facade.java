@@ -175,4 +175,38 @@ public class Facade implements Ifacade {
         }
         return resultList;
     }
+
+//    public List<MovieDTO> getRoomSwipeListByRoomCode(String roomCode, Long userId) throws IdNotFoundException {
+//
+//        EntityManager em = emf.createEntityManager();
+//        Room room = getRoomByRoomCode(roomCode);
+//        List<Long> usersInRoom = em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", Long.class)
+//                .setParameter("roomCode", roomCode).getResultList();
+//
+//        Set<MovieDTO> moviesList = new HashSet<>();
+//
+//        for (int i = 0; i < usersInRoom.size(); i++) {
+//            if (usersInRoom.get(i) == userId){
+//                usersInRoom.remove(i);
+//            }
+//        }
+//
+//        for (Long ur : usersInRoom) {
+//            for (MovieDTO m : likedMoviesByUserId(ur)) {
+//                moviesList.add(m);
+//            }
+//        }
+//        List<MovieDTO> hashedList = new ArrayList<>(moviesList);
+//
+//        List<MovieDTO> resultList = new ArrayList<>();
+//
+//        for (MovieDTO movie : hashedList) {
+//            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid and um.liked = true", Long.class)
+//                    .setParameter("movieid", movie.getId()).getResultList();
+//            if (usersWhoLikeSpecificMovie.containsAll(usersInRoom) == true) {
+//                resultList.add(movie);
+//            }
+//        }
+//        return resultList;
+//    }
 }
