@@ -27,24 +27,23 @@ public class Facade implements Ifacade {
     }
 
 
-
     @Override
     public List<MovieDTO> likedMoviesByUserId(Long id) throws IdNotFoundException {
         EntityManager em = emf.createEntityManager();
 
         List<Movie> movieList = new ArrayList<>();
-        User user = em.find(User.class,id);
+        User user = em.find(User.class, id);
 
-        if (user.getId()== null){
+        if (user.getId() == null) {
             throw new IdNotFoundException("id not found");
         }
 
-        List<UserMovie> userMovieList = em.createQuery("SELECT um FROM UserMovie um WHERE um.user.id = :id",UserMovie.class)
+        List<UserMovie> userMovieList = em.createQuery("SELECT um FROM UserMovie um WHERE um.user.id = :id", UserMovie.class)
                 .setParameter("id", id).getResultList();
 
 
         for (UserMovie um : userMovieList) {
-            if (um.isLiked()){
+            if (um.isLiked()) {
                 movieList.add(um.getMovie());
             }
         }
@@ -90,63 +89,71 @@ public class Facade implements Ifacade {
     }
 
     @Override
-    public Movie addMovieInteraction(Movie movie, User user, boolean isLiked){
+    public Movie addMovieInteraction(Movie movie, User user, boolean isLiked) {
         EntityManager em = emf.createEntityManager();
 
-        UserMovie userMovie = new UserMovie(user,movie,isLiked);
+        UserMovie userMovie = new UserMovie(user, movie, isLiked);
 
-        try{
-          em.getTransaction().begin();
+        try {
+            em.getTransaction().begin();
 
-          em.persist(userMovie);
+            em.persist(userMovie);
 
-          em.getTransaction().commit();
+            em.getTransaction().commit();
         } finally {
-         em.close();
+            em.close();
         }
 
         return movie;
     }
 
-         public Room createRoom(User owner, String roomCode){
-             EntityManager em = emf.createEntityManager();
-             Room room = new Room(owner,roomCode);
-            try {
+    public Room createRoom(User owner, String roomCode) {
+        EntityManager em = emf.createEntityManager();
+        Room room = new Room(owner, roomCode);
+        try {
 
-                em.getTransaction().begin();
-                em.persist(room);
-                em.getTransaction().commit();
-            }
-            finally {
-                em.close();
-            }
-
+            em.getTransaction().begin();
+            em.persist(room);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
 
 
         return room;
-   }
-        public User addUserToRoom(User user,Room room){
-        EntityManager em= emf.createEntityManager();
-            UserRoom userRoom = new UserRoom(user,room);
-            try {
+    }
 
-                em.getTransaction().begin();
-                em.persist(userRoom);
-                em.getTransaction().commit();
-            }
-            finally {
-                em.close();
-            }
+    public User addUserToRoom(User user, Room room) {
+        EntityManager em = emf.createEntityManager();
+        UserRoom userRoom = new UserRoom(user, room);
+        try {
+
+            em.getTransaction().begin();
+            em.persist(userRoom);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
         return user;
-        }
+    }
 
-        public Room getRoomByRoomCode(String roomCode){
-        EntityManager em= emf.createEntityManager();
+    public Room getRoomByRoomCode(String roomCode) {
+        EntityManager em = emf.createEntityManager();
         Room room = em.createQuery("select r from Room r where r.roomCode= :roomCode", Room.class)
-            .setParameter("roomCode",roomCode).getSingleResult();
+                .setParameter("roomCode", roomCode).getSingleResult();
 
 
         return room;
-        }
+    }
+
+    public List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) {
+
+        EntityManager em=emf.createEntityManager();
+        Room room = getRoomByRoomCode(roomCode);
+        List <UserRoom> userList= em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", UserRoom.class)
+                .setParameter("roomCode",roomCode).getResultList();
+        System.out.println(userList.toString());
+        return null;
+    }
 
 }
