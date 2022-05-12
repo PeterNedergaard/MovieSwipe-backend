@@ -108,13 +108,16 @@ public class Resource {
 
 
     @GET
-    @Path("likedmovies/{id}")
+    @Path("likedmovies/{username}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getLikedMoviesByUserId(@PathParam("id") Long id)throws IdNotFoundException
+    public Response getLikedMoviesByUserId(@PathParam("username") String userName)throws IdNotFoundException
     {
+
+        User user = facade.getUserByName(userName);
+
         return Response
                 .ok()
-                .entity(gson.toJson(facade.likedMoviesByUserId(id)))
+                .entity(gson.toJson(facade.likedMoviesByUserId(user.getId())))
                 .build();
 
     }
@@ -219,6 +222,22 @@ public class Resource {
         return Response
                 .ok()
                 .entity(gson.toJson(result))
+                .build();
+
+    }
+
+
+    @GET
+    @Path("usersrooms/{username}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getRoomsByUser(@PathParam("username") String userName)throws IdNotFoundException
+    {
+
+        User user = facade.getUserByName(userName);
+
+        return Response
+                .ok()
+                .entity(gson.toJson(facade.getRoomsByUser(user)))
                 .build();
 
     }

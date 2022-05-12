@@ -1,8 +1,10 @@
 package facades;
 
 import dtos.MovieDTO;
+import dtos.RoomDTO;
 import entities.*;
 import errorhandling.IdNotFoundException;
+import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -197,7 +199,24 @@ public class Facade implements Ifacade {
     }
 
 
-//    public List<Room>
+    public List<RoomDTO> getRoomsByUser(User user) {
+        EntityManager em = emf.createEntityManager();
+
+        List<Long> roomIdList = em.createQuery("SELECT ur.room.id FROM UserRoom ur WHERE ur.user.id = :userId",Long.class)
+                .setParameter("userId",user.getId()).getResultList();
+
+
+        List<Room> roomList = new ArrayList<>();
+
+        for (Long id : roomIdList) {
+            roomList.add(em.find(Room.class,id));
+        }
+
+
+        return RoomDTO.getRoomDTOS(roomList);
+    }
+
+
 
 //    public List<MovieDTO> getRoomSwipeListByRoomCode(String roomCode, Long userId) throws IdNotFoundException {
 //

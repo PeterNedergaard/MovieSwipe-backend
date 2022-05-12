@@ -15,7 +15,7 @@ GET http://localhost:8080/CA2backend_war_exploded/api/all
 GET http://localhost:8080/CA2backend_war_exploded/api/info/jokes
 
 ###
-GET http://localhost:8080/CA2backend_war_exploded/api/info/likedmovies/7
+GET http://localhost:8080/CA2backend_war_exploded/api/info/likedmovies/Rabee
 
 ###
 POST http://localhost:8080/CA2backend_war_exploded/api/info/likeordislike
@@ -44,3 +44,6 @@ roomcode: "12345"
 
 ###
 GET http://localhost:8080/CA2backend_war_exploded/api/info/roomlikes/4321
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/usersrooms/Rabee
