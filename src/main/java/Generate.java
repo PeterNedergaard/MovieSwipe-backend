@@ -25,8 +25,8 @@ public class Generate {
         User admin = new User("admin", "test123");
         User both = new User("user_admin", "test123");
 
-        Room room1 = new Room(user1,"1234");
-        Room room2 = new Room(user2,"4321");
+        Room room1 = new Room(user1,"1234","CoolRoom");
+        Room room2 = new Room(user2,"4321","Movie Room");
 
         //owners
         UserRoom userRoom1 = new UserRoom(user1,room1);

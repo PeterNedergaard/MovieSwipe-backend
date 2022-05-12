@@ -113,13 +113,21 @@ public class Facade implements Ifacade {
     }
 
 
-    public Room createRoom(User owner, String roomCode) {
+    public Room createRoom(User owner, String roomCode, String roomName) {
         EntityManager em = emf.createEntityManager();
-        Room room = new Room(owner, roomCode);
-        try {
 
+        Room room = new Room(owner, roomCode, roomName);
+        UserRoom userRoom = new UserRoom(owner,room);
+
+        owner.addToUserRoomList(userRoom);
+
+        try {
             em.getTransaction().begin();
+
             em.persist(room);
+            em.persist(userRoom);
+            em.merge(owner);
+
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -187,6 +195,9 @@ public class Facade implements Ifacade {
 
         return resultList;
     }
+
+
+//    public List<Room>
 
 //    public List<MovieDTO> getRoomSwipeListByRoomCode(String roomCode, Long userId) throws IdNotFoundException {
 //

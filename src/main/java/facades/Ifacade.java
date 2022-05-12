@@ -15,7 +15,7 @@ public interface Ifacade {
     User getUserByName(String Name);
     Long getUserIdByUserName(String userName);
     Movie addMovieInteraction(Movie movie, User user, boolean isLiked);
-    Room createRoom(User owner, String roomCode);
+    Room createRoom(User owner, String roomCode, String roomName);
     User addUserToRoom(User user,Room room);
     Room getRoomByRoomCode(String roomCode);
     List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) throws IdNotFoundException;

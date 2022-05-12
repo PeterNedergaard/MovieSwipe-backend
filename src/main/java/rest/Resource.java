@@ -23,6 +23,7 @@ import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Path("info")
 public class Resource {
@@ -159,20 +160,24 @@ public class Resource {
         EntityManager em = EMF.createEntityManager();
 
         User owner;
-        String roomCode;
         String userName;
+        String roomName;
+
+        int min = 1000;
+        int max = 9999;
+        int roomCode = ThreadLocalRandom.current().nextInt(min,max+1);
 
         try {
             JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
             userName = json.get("username").getAsString();
-            roomCode = json.get("roomcode").getAsString();
+            roomName = json.get("roomname").getAsString();
 
             owner = facade.getUserByName(userName);
 
         } catch (Exception e) {
             throw new API_Exception("Malformed JSON Suplied", 400, e);
         }
-        facade.createRoom(owner,roomCode);
+        facade.createRoom(owner, String.valueOf(roomCode),roomName);
     }
 
 
@@ -194,7 +199,7 @@ public class Resource {
             roomCode = json.get("roomcode").getAsString();
 
             user = facade.getUserByName(userName);
-            room= facade.getRoomByRoomCode(roomCode);
+            room = facade.getRoomByRoomCode(roomCode);
 
         } catch (Exception e) {
             throw new API_Exception("Malformed JSON Suplied", 400, e);

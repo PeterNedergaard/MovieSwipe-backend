@@ -31,7 +31,7 @@ POST http://localhost:8080/CA2backend_war_exploded/api/info/createroom
 
 {
 username: "Rabee",
-roomcode: "12345"
+roomname: "Rabees room 3"
 }
 
 ###

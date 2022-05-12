@@ -14,14 +14,16 @@ public class Room {
     private Long id;
     private Long ownerId;
     private String roomCode;
+    private String roomName;
 
     @OneToMany(mappedBy = "room")
     private List<UserRoom> userRoomList = new ArrayList<>();
 
 
-    public Room(User owner, String roomCode) {
+    public Room(User owner, String roomCode, String roomName) {
         this.ownerId = owner.getId();
         this.roomCode = roomCode;
+        this.roomName = roomName;
     }
 
     public Room() {
@@ -30,6 +32,14 @@ public class Room {
 
     public void addToUserRoomList(UserRoom userRoom){
         this.userRoomList.add(userRoom);
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public Long getOwnerId() {
@@ -69,11 +79,11 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return Objects.equals(ownerId, room.ownerId) && Objects.equals(roomCode, room.roomCode) && Objects.equals(userRoomList, room.userRoomList);
+        return Objects.equals(ownerId, room.ownerId) && Objects.equals(roomCode, room.roomCode) && Objects.equals(roomName, room.roomName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ownerId, roomCode, userRoomList);
+        return Objects.hash(ownerId, roomCode, roomName);
     }
 }
