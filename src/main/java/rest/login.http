@@ -46,4 +46,4 @@ roomcode: "6992"
 GET http://localhost:8080/CA2backend_war_exploded/api/info/roomlikes/4321
 
 ###
-GET http://localhost:8080/CA2backend_war_exploded/api/info/usersrooms/Peter
+GET http://localhost:8080/CA2backend_war_exploded/api/info/usersrooms/Rabee

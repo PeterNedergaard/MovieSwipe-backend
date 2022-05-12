@@ -234,7 +234,7 @@ public class Resource {
     {
 
         User user = facade.getUserByName(userName);
-        //
+
         return Response
                 .ok()
                 .entity(gson.toJson(facade.getRoomsByUser(user)))
