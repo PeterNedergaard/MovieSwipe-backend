@@ -214,7 +214,7 @@ public class Resource {
     @GET
     @Path("roomlikes/{roomcode}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getLikedMoviesByRoomCode(@PathParam("roomcode") String roomCode)throws IdNotFoundException
+    public Response getLikedMoviesByRoomCode(@PathParam("roomcode") String roomCode) throws IdNotFoundException
     {
 
         List<MovieDTO> result = facade.getLikedMoviesByRoomCode(roomCode);
@@ -230,7 +230,7 @@ public class Resource {
     @GET
     @Path("usersrooms/{username}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getRoomsByUser(@PathParam("username") String userName)throws IdNotFoundException
+    public Response getRoomsByUser(@PathParam("username") String userName) throws IdNotFoundException
     {
 
         User user = facade.getUserByName(userName);

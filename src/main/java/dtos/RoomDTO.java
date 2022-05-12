@@ -2,7 +2,12 @@ package dtos;
 
 import entities.Movie;
 import entities.Room;
+import entities.User;
+import facades.Facade;
+import utils.EMF_Creator;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +17,7 @@ public class RoomDTO {
     private Long ownerId;
     private String roomCode;
     private String roomName;
+    private String ownerName;
 
 
 
@@ -20,7 +26,6 @@ public class RoomDTO {
         this.ownerId = room.getOwnerId();
         this.roomCode = room.getRoomCode();
         this.roomName = room.getRoomName();
-
     }
 
     public RoomDTO(Long id, Long ownerId, String roomCode, String roomName) {
@@ -36,7 +41,7 @@ public class RoomDTO {
     public static List<RoomDTO> getRoomDTOS(List<Room> rooms){
         List<RoomDTO> roomDTOS = new ArrayList<>();
 
-        rooms.forEach(p->roomDTOS.add(new RoomDTO(p)));
+        rooms.forEach(r->roomDTOS.add(new RoomDTO(r)));
 
         return roomDTOS;
     }
@@ -81,6 +86,7 @@ public class RoomDTO {
                 ", ownerId=" + ownerId +
                 ", roomCode='" + roomCode + '\'' +
                 ", roomName='" + roomName + '\'' +
+                ", ownerName='" + ownerName + '\'' +
                 '}';
     }
 }

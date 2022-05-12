@@ -30,8 +30,8 @@ isliked: "true"
 POST http://localhost:8080/CA2backend_war_exploded/api/info/createroom
 
 {
-username: "Rabee",
-roomname: "Rabees room 3"
+username: "Peter",
+roomname: "Peters room"
 }
 
 ###
@@ -39,11 +39,11 @@ POST http://localhost:8080/CA2backend_war_exploded/api/info/addtoroom
 
 {
 username: "Peter",
-roomcode: "12345"
+roomcode: "6992"
 }
 
 ###
 GET http://localhost:8080/CA2backend_war_exploded/api/info/roomlikes/4321
 
 ###
-GET http://localhost:8080/CA2backend_war_exploded/api/info/usersrooms/Rabee
+GET http://localhost:8080/CA2backend_war_exploded/api/info/usersrooms/Peter
