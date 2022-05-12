@@ -16,8 +16,9 @@ public class TestMain {
         Facade facade = Facade.getFacade(EMF_Creator.createEntityManagerFactory());
 
         //facade.likedMoviesByUserId(1L);
-//        System.out.println(facade.getLikedMoviesByRoomCode("4321"));
-        System.out.println(facade.getRoomsByUser(em.find(User.class, 4L)).toString());
+        //System.out.println(facade.getLikedMoviesByRoomCode("4321"));
+        //System.out.println(facade.getRoomsByUser(em.find(User.class, 4L)).toString());
+        facade.createRoom(em.find(User.class,1L),"4444","Mo123");
     }
 
 }

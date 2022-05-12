@@ -20,6 +20,7 @@ public class RoomDTO {
         this.ownerId = room.getOwnerId();
         this.roomCode = room.getRoomCode();
         this.roomName = room.getRoomName();
+
     }
 
     public RoomDTO(Long id, Long ownerId, String roomCode, String roomName) {
