@@ -47,3 +47,6 @@ GET http://localhost:8080/CA2backend_war_exploded/api/info/roomlikes/4321
 
 ###
 GET http://localhost:8080/CA2backend_war_exploded/api/info/usersrooms/Rabee
+
+###
+GET http://localhost:8080/CA2backend_war_exploded/api/info/usersbyroom/4321

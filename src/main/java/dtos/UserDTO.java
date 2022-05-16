@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO {
+
+    private Long id;
     private String userName;
-        private Long id;
 
     public UserDTO(String userName, Long id) {
         this.userName = userName;

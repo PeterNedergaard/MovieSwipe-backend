@@ -217,6 +217,25 @@ public class Facade implements Ifacade {
     }
 
 
+    public List<String> getUsersByRoomCode(String roomCode){
+        EntityManager em = emf.createEntityManager();
+
+        Room room = getRoomByRoomCode(roomCode);
+        List<String> listOfUserNames = new ArrayList<>();
+
+        List<Long> listOfIds = em.createQuery("SELECT ur.user.id FROM UserRoom ur WHERE ur.room.id = :roomid", Long.class)
+                .setParameter("roomid",room.getId()).getResultList();
+
+
+        for (Long id : listOfIds) {
+            listOfUserNames.add(em.find(User.class,id).getUserName());
+        }
+
+
+        return listOfUserNames;
+    }
+
+
 
 //    public List<MovieDTO> getRoomSwipeListByRoomCode(String roomCode, Long userId) throws IdNotFoundException {
 //

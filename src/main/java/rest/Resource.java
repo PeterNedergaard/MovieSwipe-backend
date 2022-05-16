@@ -242,5 +242,19 @@ public class Resource {
 
     }
 
+
+    @GET
+    @Path("usersbyroom/{roomcode}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getUsersByRoomCode(@PathParam("roomcode") String roomCode) throws IdNotFoundException
+    {
+
+        return Response
+                .ok()
+                .entity(gson.toJson(facade.getUsersByRoomCode(roomCode)))
+                .build();
+
+    }
+
 }
 
