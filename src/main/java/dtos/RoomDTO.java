@@ -10,6 +10,7 @@ public class RoomDTO {
 
     private Long id;
     private Long ownerId;
+    private String ownerName;
     private String roomCode;
     private String roomName;
 
@@ -17,6 +18,7 @@ public class RoomDTO {
     public RoomDTO(Room room) {
         this.id = room.getId();
         this.ownerId = room.getOwnerId();
+        this.ownerName = room.getOwnerName();
         this.roomCode = room.getRoomCode();
         this.roomName = room.getRoomName();
 
@@ -40,6 +42,14 @@ public class RoomDTO {
         return roomDTOS;
     }
 
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
     public Long getId() {
         return id;

@@ -121,14 +121,6 @@ public class User implements Serializable {
     roleList.add(userRole);
   }
 
-//  public List<Movie> getMovieList() {
-//    return movieList;
-//  }
-//
-//  public void setMovieList(List<Movie> movieList) {
-//    this.movieList = movieList;
-//  }
-
   public Long getId() {
     return id;
   }
@@ -137,7 +129,4 @@ public class User implements Serializable {
     this.id = id;
   }
 
-//  public void addDislike(UserMovie userMovie) {
-//    this.dislikedListUser.add(userMovie);
-//  }
 }

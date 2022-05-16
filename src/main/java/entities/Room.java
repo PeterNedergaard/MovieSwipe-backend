@@ -13,6 +13,7 @@ public class Room {
     @Column(name = "id", nullable = false)
     private Long id;
     private Long ownerId;
+    private String ownerName;
     private String roomCode;
     private String roomName;
 
@@ -22,6 +23,7 @@ public class Room {
 
     public Room(User owner, String roomCode, String roomName) {
         this.ownerId = owner.getId();
+        this.ownerName = owner.getUserName();
         this.roomCode = roomCode;
         this.roomName = roomName;
     }
@@ -32,6 +34,14 @@ public class Room {
 
     public void addToUserRoomList(UserRoom userRoom){
         this.userRoomList.add(userRoom);
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public String getRoomName() {
