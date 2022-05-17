@@ -20,6 +20,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -259,18 +261,20 @@ public class Resource {
 
 
     @GET
-    @Path("roomswipe")
+    @Path("roomswipe/{jsonstring}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response roomSwipe(String jsonString) throws API_Exception, IdNotFoundException {
+    public Response roomSwipe(@PathParam("jsonstring") String jsonString) throws API_Exception, IdNotFoundException, UnsupportedEncodingException {
         EntityManager em = EMF.createEntityManager();
 
         User user;
         String userName;
         String roomCode;
 
+        String decoded = URLDecoder.decode(jsonString, "UTF8");
+
         try {
-            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
+            JsonObject json = JsonParser.parseString(decoded).getAsJsonObject();
             userName = json.get("username").getAsString();
             roomCode = json.get("roomcode").getAsString();
 
