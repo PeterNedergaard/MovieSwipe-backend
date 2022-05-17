@@ -19,7 +19,9 @@ public class TestMain {
         //System.out.println(facade.getLikedMoviesByRoomCode("4321"));
 //        System.out.println(facade.getRoomsByUser(em.find(User.class, 3L)).toString());
 //        facade.createRoom(em.find(User.class,1L),"4444","Mo123");
-        System.out.println(facade.getUsersByRoomCode("1234"));
+//        System.out.println(facade.getUsersByRoomCode("1234"));
+
+        System.out.println(facade.getRoomMembersLikedMovies("1234",em.find(User.class,2L)));
     }
 
 }

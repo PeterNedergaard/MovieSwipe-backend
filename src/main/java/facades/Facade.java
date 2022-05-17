@@ -165,39 +165,6 @@ public class Facade implements Ifacade {
     }
 
 
-    public List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) throws IdNotFoundException {
-
-        EntityManager em = emf.createEntityManager();
-        Room room = getRoomByRoomCode(roomCode);
-        List<Long> usersInRoom = em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", Long.class)
-                .setParameter("roomCode", roomCode).getResultList();
-
-        Set<MovieDTO> moviesList = new HashSet<>();
-
-        for (Long ur : usersInRoom) {
-            for (MovieDTO m : likedMoviesByUserId(ur)) {
-                moviesList.add(m);
-            }
-        }
-
-        List<MovieDTO> hashedList = new ArrayList<>(moviesList);
-
-        List<MovieDTO> resultList = new ArrayList<>();
-
-
-        for (MovieDTO movie : hashedList) {
-            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid", Long.class)
-                    .setParameter("movieid", movie.getId()).getResultList();
-
-            if (usersWhoLikeSpecificMovie.containsAll(usersInRoom) == true) {
-                resultList.add(movie);
-            }
-        }
-
-
-        return resultList;
-    }
-
 
     public List<RoomDTO> getRoomsByUser(User user) {
         EntityManager em = emf.createEntityManager();
@@ -237,6 +204,7 @@ public class Facade implements Ifacade {
 
 
 
+
 //    public List<MovieDTO> getRoomSwipeListByRoomCode(String roomCode, Long userId) throws IdNotFoundException {
 //
 //        EntityManager em = emf.createEntityManager();
@@ -270,4 +238,81 @@ public class Facade implements Ifacade {
 //        }
 //        return resultList;
 //    }
+
+
+    public List<MovieDTO> getLikedMoviesByRoomCode(String roomCode) throws IdNotFoundException {
+
+        EntityManager em = emf.createEntityManager();
+        Room room = getRoomByRoomCode(roomCode);
+        List<Long> usersInRoom = em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", Long.class)
+                .setParameter("roomCode", roomCode).getResultList();
+
+        Set<MovieDTO> moviesList = new HashSet<>();
+
+        for (Long ur : usersInRoom) {
+            for (MovieDTO m : likedMoviesByUserId(ur)) {
+                moviesList.add(m);
+            }
+        }
+
+        List<MovieDTO> hashedList = new ArrayList<>(moviesList);
+
+        List<MovieDTO> resultList = new ArrayList<>();
+
+
+        for (MovieDTO movie : hashedList) {
+            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid", Long.class)
+                    .setParameter("movieid", movie.getId()).getResultList();
+
+            if (usersWhoLikeSpecificMovie.containsAll(usersInRoom) == true) {
+                resultList.add(movie);
+            }
+        }
+
+
+        return resultList;
+    }
+
+
+    public List<MovieDTO> getRoomMembersLikedMovies(String roomCode, User user) throws IdNotFoundException {
+
+        EntityManager em = emf.createEntityManager();
+        Room room = getRoomByRoomCode(roomCode);
+        List<Long> usersInRoom = em.createQuery("select u.user.id from UserRoom u where u.room.roomCode= :roomCode", Long.class)
+                .setParameter("roomCode", roomCode).getResultList();
+
+        Set<MovieDTO> moviesList = new HashSet<>();
+
+        usersInRoom.remove(user.getId());
+
+        for (Long ur : usersInRoom) {
+            for (MovieDTO m : likedMoviesByUserId(ur)) {
+                moviesList.add(m);
+            }
+        }
+
+        List<MovieDTO> hashedList = new ArrayList<>(moviesList);
+
+        List<MovieDTO> resultList = new ArrayList<>();
+
+        List<MovieDTO> userMovies = likedMoviesByUserId(user.getId());
+
+
+        for (MovieDTO movieDTO : hashedList) {
+            List<Long> usersWhoLikeSpecificMovie = em.createQuery("select um.user.id from UserMovie um where um.movie.id = :movieid", Long.class)
+                    .setParameter("movieid", movieDTO.getId()).getResultList();
+
+            if (usersWhoLikeSpecificMovie.containsAll(usersInRoom) == true) {
+                resultList.add(movieDTO);
+            }
+        }
+
+
+        resultList.removeAll(userMovies);
+
+
+
+
+        return resultList;
+    }
 }

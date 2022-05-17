@@ -256,5 +256,36 @@ public class Resource {
 
     }
 
+
+
+    @GET
+    @Path("roomswipe")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response roomSwipe(String jsonString) throws API_Exception, IdNotFoundException {
+        EntityManager em = EMF.createEntityManager();
+
+        User user;
+        String userName;
+        String roomCode;
+
+        try {
+            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
+            userName = json.get("username").getAsString();
+            roomCode = json.get("roomcode").getAsString();
+
+            user = facade.getUserByName(userName);
+
+        } catch (Exception e) {
+            throw new API_Exception("Malformed JSON Suplied", 400, e);
+        }
+        return Response
+                .ok()
+                .entity(gson.toJson(facade.getRoomMembersLikedMovies(roomCode,user)))
+                .build();
+    }
+
+
+
 }
 
