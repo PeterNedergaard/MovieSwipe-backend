@@ -21,7 +21,7 @@
 
         <!-- TODO: Add your own database name -->
         <!-- IMPORTANT-1: The database should exist on your droplet -->
-        <db.name>startcode</db.name>
+        <db.name>movie_swipe</db.name>
     </properties>
 
     <dependencies>
