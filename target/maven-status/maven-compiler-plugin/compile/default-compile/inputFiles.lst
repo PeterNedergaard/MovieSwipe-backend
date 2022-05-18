@@ -1,12 +1,15 @@
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\utils\Utility.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\entities\Room.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\dtos\UserDTO.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\errorhandling\AuthenticationException.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\facades\JokeFacade.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\utils\ParallelJokes.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\entities\UserMovie.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\facades\Ifacade.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\facades\Facade.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\utils\EMF_Creator.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\errorhandling\API_Exception.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\errorhandling\IdNotFoundException.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\errorhandling\AuthenticationExceptionMapper.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\dtos\RenameMeDTO.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\SharedSecret.java
@@ -21,7 +24,9 @@ C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\dtos
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\entities\Joke.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\entities\Movie.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\entities\RenameMe.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\errorhandling\IdNotFoundExceptionMapper.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\cors\CorsFilter.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\entities\UserRoom.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\Generate.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\JWTAuthenticationFilter.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\UserPrincipal.java
@@ -30,5 +35,7 @@ C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\erro
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\utils\HttpUtils.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\JWTSecurityContext.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\rest\Resource.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\dtos\RoomDTO.java
+C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\TestMain.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\errorhandling\ExceptionDTO.java
 C:\Users\fiske\Desktop\Sys eksamensprojekt\MovieSwipe-backend\src\main\java\security\RolesAllowedFilter.java
