@@ -91,16 +91,11 @@ class ResourceTest {
     }
 
 
-//    @Test
-//    public void testServerIsUp() {
-//        System.out.println("Testing is server up");
-//        given()
-//                .contentType("application/json")
-//                .when()
-//                .get("/info")
-//                .then()
-//                .statusCode(200);
-//    }
+    @Test
+    public void testServerIsUp() {
+        System.out.println("Testing is server up");
+        given().when().get("/info").then().statusCode(200);
+    }
 //
 //
 //    @Test
